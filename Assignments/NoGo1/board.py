@@ -27,7 +27,7 @@ class GoBoard(object):
             color
         """
         self.public_msg = 0
-
+        
         move_inspection, msg =self._play_move(point,color)
         self.public_msg = msg
         if not move_inspection:
@@ -472,8 +472,8 @@ class GoBoard(object):
             if cap_inds!= None:
                 self.board[cap_inds]=GoBoardUtil.opponent(color)
             c=self._point_to_coord(point)
-            msg = "Suicide move with color %s in the row and column: %d %d "%(color, c[0],c[1])
-            msg = "suicide"
+            #msg = "Suicide move with color %s in the row and column: %d %d "%(color, c[0],c[1])
+            msg= "suicide"
             return False, msg
 
 

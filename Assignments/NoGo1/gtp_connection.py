@@ -297,7 +297,11 @@ class GtpConnection():
 
             if args[1].lower()=='pass':
                 self.debug_msg("Player {} is passing\n".format(args[0]))
-                self.respond("illegal move: Passing")
+                
+                #self.respond("illegal move: Passing")
+                ########handle passing
+                self.respond("passing")
+                #########
                 return
             
 
@@ -314,7 +318,9 @@ class GtpConnection():
 
             move_flag = self.board.move(move, color)
             if not move_flag:
+                ##################
                 self.respond("%s" %(self.board.public_msg))
+                ##################
                 return
 
 

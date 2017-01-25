@@ -1,0 +1,6 @@
+play b a1
+play w b2
+play w a2
+play w b1
+showboard
+

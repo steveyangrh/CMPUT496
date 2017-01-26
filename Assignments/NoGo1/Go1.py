@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 from gtp_connection import GtpConnection
 from board_util import GoBoardUtil
 

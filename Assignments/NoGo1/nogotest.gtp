@@ -25,7 +25,7 @@ play w a1
 40 play b b1
 #? [illegal move: b b1 capture]
 
-boardsize 4
+boardsize 3
 clear_board
 
 play w a4

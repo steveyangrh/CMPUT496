@@ -422,7 +422,7 @@ class GoBoard(object):
         if self.board[point] != EMPTY:
             c=self._point_to_coord(point)
             msg = "illegal move: %s %s occupied"%(GoBoardUtil.int_to_color(color),GoBoardUtil.format_point(c))
-            mag = "occupied"
+            #mag = "occupied"
             return False,msg
         if point == self.ko_constraint:
             msg ="KO move is not permitted!"
@@ -449,7 +449,8 @@ class GoBoard(object):
                         ##################################################################################
                         '''
                         if num_captures > 0 :
-                            msg = "capture"
+                            c=self._point_to_coord(point)
+                            msg = "illegal move: %s %s capture"%(GoBoardUtil.int_to_color(color), GoBoardUtil.format_point(c))
                             self.board[point] = EMPTY;
                             return False, msg
                         '''
@@ -480,7 +481,7 @@ class GoBoard(object):
                 self.board[cap_inds]=GoBoardUtil.opponent(color)
             c=self._point_to_coord(point)
             #msg = "Suicide move with color %s in the row and column: %d %d "%(color, c[0],c[1])
-            msg= "suicide"
+            msg= "illegal move: %s %s suicide"%(GoBoardUtil.int_to_color(color), GoBoardUtil.format_point(c))
             return False, msg
 
 

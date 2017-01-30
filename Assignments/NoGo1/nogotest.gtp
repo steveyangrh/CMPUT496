@@ -33,3 +33,6 @@ play w a4
 
 play r a1
 #? [illegal move: r a1 wrong color]
+
+play b a1 a2
+#? [illegal move: b a1 a2 wrong number of arguments]

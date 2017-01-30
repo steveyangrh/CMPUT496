@@ -115,6 +115,11 @@ class GtpConnection():
             return
         command_name = elements[0]; args = elements[1:]
         if self.arg_error(command_name, len(args)):
+            error_msg = 'illegal move:'
+            for arg in args:
+                error_msg = error_msg + ' ' + arg
+            error_msg = error_msg + ' wrong number of arguments'
+            self.respond(error_msg)
             return
         if command_name in self.commands:
             try:
@@ -137,15 +142,14 @@ class GtpConnection():
         cmd : str
             the command name
         argnum : int
-            number of parsed argument
+            number of parsed arguments
 
         Returns
         -------
         True if there was an argument error
         False otherwise
         """
-        if cmd in self.argmap and self.argmap[cmd][0] > argnum:
-                self.error(self.argmap[cmd][1])
+        if cmd in self.argmap and self.argmap[cmd][0] != argnum:
                 return True
         return False
 

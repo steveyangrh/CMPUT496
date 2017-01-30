@@ -24,3 +24,12 @@ play w a1
 
 40 play b b1
 #? [illegal move: b b1 capture]
+
+boardsize 4
+clear_board
+
+play w a4
+#? [illegal move: w a4 wrong coordinate]
+
+play r a1
+#? [illegal move: r a1 wrong color]

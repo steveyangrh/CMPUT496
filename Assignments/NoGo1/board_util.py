@@ -9,27 +9,27 @@ class GoBoardUtil(object):
     
     @staticmethod       
     def play(komi,board,color,limit=None):
-        twopass=2
+        onepass=1
         if limit:
             for i in range(limit):
-                while twopass:
+                while onepass:
                     move = GoBoardUtil.generate_random_move(board,color)
                     if move !=None:
                         if not (board.move(move,color)):
                             raise ValueError("Move given by GoBoardUtil is not valid!")
-                        twopass = 2
+                        onepass = 1
                     else:
-                        twopass -= 1
+                        onepass -= 1
                     color = GoBoardUtil.opponent(color)
         else:
-            while twopass:
+            while onepass:
                 move = GoBoardUtil.generate_random_move(board,color)
                 if move !=None:
                     if not (board.move(move,color)):
                         raise ValueError("Move given by GoBoardUtil is not valid!")
-                    twopass = 2
+                    onepass = 1
                 else:
-                    twopass -= 1
+                    onepass -= 1
                 color = GoBoardUtil.opponent(color)
         winner = board.get_winner(komi)
         return winner

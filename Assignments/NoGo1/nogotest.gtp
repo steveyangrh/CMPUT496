@@ -1,0 +1,26 @@
+boardsize 3
+clear_board
+
+play b a2
+play b b1
+play b c2
+play b b3
+10 legal_moves w
+#? []
+# all moves are suicide
+
+20 play w b2
+#? [illegal move: w b2 suicide]
+
+boardsize 3
+clear_board
+
+play b a2
+play w a1
+
+30 legal_moves b
+#? [a3 b2 b3 c1 c2 c3]
+# b1 is a capture
+
+40 play b b1
+#? [illegal move: b b1 capture]

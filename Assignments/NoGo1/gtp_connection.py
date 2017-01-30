@@ -294,11 +294,18 @@ class GtpConnection():
         args[1] : str
             the move to play (e.g. A5)
         """
+        board_color = args[0].lower()
+        board_move = args[1]
         try:
-            board_color = args[0].lower()
-            board_move = args[1]
             color= GoBoardUtil.color_to_int(board_color)
+        except:
+            arg_str = ''
+            for arg in args:
+                arg_str += ' ' + arg
+            self.respond("illegal move:%s wrong color"%(arg_str))
+            return 
 
+        try:
             if args[1].lower()=='pass':
                 self.debug_msg("Player {} is passing\n".format(args[0]))
                 

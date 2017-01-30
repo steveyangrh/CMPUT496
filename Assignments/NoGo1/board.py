@@ -82,29 +82,36 @@ class GoBoard(object):
         # Count number of positions filled by each player, plus 1 for each eye-ish space owned
         score_white = np.sum(self.board == WHITE)
         score_black = np.sum(self.board == BLACK)
-        empties = list(*np.where(self.board == EMPTY))
-        for empty in empties:
-            # Check that all surrounding points are of one color
-            result = self._is_eyeish(empty)
-            if result==BLACK:
-                score_black += 1
-            elif result==WHITE:
-                score_white += 1
-        score_white += komi
-        score_white -= self.passes_white
-        score_black -= self.passes_black
-        if score_black > score_white:
-            self.winner = BLACK
-        elif score_white > score_black:
-            self.winner = WHITE
-        else:
-            # Tie
-            self.winner = 0
-        if self.winner==1:
-            result="B+{}".format( score_black - score_white )
+#        empties = list(*np.where(self.board == EMPTY))
+#        for empty in empties:
+#            # Check that all surrounding points are of one color
+#            result = self._is_eyeish(empty)
+#            if result==BLACK:
+#                score_black += 1
+#            elif result==WHITE:
+#                score_white += 1
+#        score_white += komi
+#        score_white -= self.passes_white
+#        score_black -= self.passes_black
+#        if score_black > score_white:
+#            self.winner = BLACK
+#        elif score_white > score_black:
+#            self.winner = WHITE
+#        else:
+#            # Tie
+#            self.winner = 0
+#        if self.winner==1:
+#            result="B+{}".format( score_black - score_white )
+#
+#        else:
+#            result="W+{}".format(score_white - score_black )
 
+        # White plays first, so white wins if they have more stones at the end
+        # (i.e. black passes first)
+        if (white_score > black_score):
+            result = "White wins (black passed first)"
         else:
-            result="W+{}".format(score_white - score_black )
+            result = "Black wins (white passed first)"
 
         return result
 

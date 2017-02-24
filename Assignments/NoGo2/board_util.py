@@ -50,28 +50,7 @@ class GoBoardUtil(object):
         color : {'b','w'}
             the color to generate the move for.
         """
-        best_move = None
-        best_value = None
-        
-        moves = board.get_empty_positions(color)
-        num_moves = len(moves)
-        illegal_moves = []
-
-        for i in range(num_moves):
-            if board.check_legal(moves[i], color):
-                continue
-            else:
-                illegal_moves.append(i)
-        legal_moves = np.delete(moves, illegal_moves)
-        
-        for move in legal_moves:
-            board_copy = board.copy()
-            board_copy.move(move, color)
-
-            move_value = GoBoardUtil.value(board_copy, color)[0]
-            if not best_value or move_value < best_value:
-                best_value = move_value
-                best_move = move
+        best_value, best_move = value(board, color)
 
         return best_move
 

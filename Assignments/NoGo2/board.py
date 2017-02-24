@@ -110,16 +110,22 @@ class GoBoard(object):
         self.reset(size)
 
     def __eq__(self, b):
+        #print('equal check' + repr(b) + ', ' + repr(self))
         return b.size == self.size \
         and b.suicide == self.suicide \
         and b.NS == self.NS \
         and b.WE == self.WE \
+        and b.maxpoint == self.maxpoint \
         and b._is_empty == self._is_empty \
         and b.to_play == self.to_play \
         and np.all(b.board == self.board)
 
     def __hash__(self):
+        #print('hash check')
         return hash(str(self.board))
+
+    def __repr__(self):
+        return str(self.board)
 
     def reset(self, size):
         """

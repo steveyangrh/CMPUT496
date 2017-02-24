@@ -4,6 +4,9 @@ Module for playing games of Go using GoTextProtocol
 This code is based off of the gtp module in the Deep-Go project
 by Isaac Henrion and Amos Storkey at the University of Edinburgh.
 """
+
+from timeout import timeout
+
 import traceback
 import sys
 import os
@@ -45,7 +48,9 @@ class GtpConnection():
             "list_commands": self.list_commands_cmd,
             "play": self.play_cmd,
             "final_score": self.final_score_cmd,
-            "legal_moves": self.legal_moves_cmd
+            "legal_moves": self.legal_moves_cmd,
+            "solve": self.solve_cmd,
+            "timeout": self.timeout_cmd
         }
 
         # used for argument checking
@@ -57,7 +62,9 @@ class GtpConnection():
             "set_free_handicap": (1, 'Usage: set_free_handicap MOVE (e.g. A4)'),
             "genmove": (1, 'Usage: genmove {w, b}'),
             "play": (2, 'Usage: play {b, w} MOVE'),
-            "legal_moves": (1, 'Usage: legal_moves {w, b}')
+            "legal_moves": (1, 'Usage: legal_moves {w, b}'),
+            "solve": (0, 'Usage: Solve the Go game for current player .'),
+            "timeout": (1, 'Usage: Game should be solved less or euqal this time.')
         }
     
     def __del__(self):
@@ -97,10 +104,11 @@ class GtpConnection():
         if command[0].isdigit():
             command = re.sub("^\d+", "", command).lstrip()
 
-        elements = command.split()
+        elements = command.split() # eg. ['play', 'b', 'a1']
         if not elements:
             return
-        command_name = elements[0]; args = elements[1:]
+        command_name = elements[0]; 
+        args = elements[1:]
         
         if command_name == "play" and self.argmap[command_name][0] != len(args):
             self.respond('illegal move: {} wrong number of arguments'.format(args[0]))
@@ -108,6 +116,7 @@ class GtpConnection():
 
         if self.arg_error(command_name, len(args)):
             return
+        
         if command_name in self.commands:
             try:
                 self.commands[command_name](args)
@@ -174,6 +183,8 @@ class GtpConnection():
         self.respond()
         exit()
 
+    
+        
     def name_cmd(self, args):
         """ Return the name of the player """
         self.respond(self.go_engine.name)
@@ -267,6 +278,36 @@ class GtpConnection():
             self.respond(moves)
         except Exception as e:
             self.respond('Error: {}'.format(str(e)))
+            
+    ###########################################  New code     
+    
+    # Processing time out comand 
+    def timeout_cmd(self, args):
+        
+        self.board.MaxTime = int(args[0])
+        
+        self.respond('MaxTime: ' + str(self.board.MaxTime))
+    # Solve game for current player    
+    def solve_cmd(self, args):
+       
+        value, move = GoBoardUtil.value(self.board, self.board.to_play)
+
+        if value == None:
+            self.respond('\nunknown\n')
+        else:
+            if value == 1:
+                color = self.board.to_play
+            else:
+                color = GoBoardUtil.opponent(self.board.to_play)
+            
+            PrintMessage='\n' + str(GoBoardUtil.int_to_color(color)) \
+                            +' '  \
+                            + str(GoBoardUtil.format_point(self.board._point_to_coord(move))) \
+                            + '\n' 
+            
+                             
+            self.respond(PrintMessage)
+    ###########################################        
 
     def play_cmd(self, args):
         """

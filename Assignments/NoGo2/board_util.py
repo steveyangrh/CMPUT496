@@ -68,7 +68,7 @@ class GoBoardUtil(object):
             board_copy = board.copy()
             board_copy.move(move, color)
 
-            move_value = GoBoardUtil.value(board_copy, color)
+            move_value = GoBoardUtil.value(board_copy, color)[0]
             if not best_value or move_value < best_value:
                 best_value = move_value
                 best_move = move
@@ -92,12 +92,13 @@ class GoBoardUtil(object):
         if board in tTable:
             return tTable[board]
         elif board.get_winner() == color:
-            return 1
+            return 1, None
         elif board.get_winner() == opponent_color:
-            return -1
+            return -1, None
         else:
 
             best_value = None
+            best_move = None
             moves = board.get_empty_positions(color)
             num_moves = len(moves)
             illegal_moves = []
@@ -113,14 +114,15 @@ class GoBoardUtil(object):
                 board_copy = board.copy()
                 board_copy.move(move, color)
 
-                move_value = - GoBoardUtil.value(board_copy, opponent_color, tTable) 
+                move_value = - GoBoardUtil.value(board_copy, opponent_color, tTable)[0]
                 if not best_value or move_value < best_value:
                     best_value = move_value
+                    best_move = move
                 if best_value == 1:
                     break
 
-            tTable[board_copy] = best_value
-            return best_value
+            tTable[board_copy] = (best_value, best_move)
+            return best_value, best_move
             
 
     @staticmethod       

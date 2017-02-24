@@ -76,7 +76,7 @@ class GoBoardUtil(object):
         return best_move
 
     @staticmethod
-    def value(board, color):
+    def value(board, color, tTable = {}):
         """
         Return a 1 if it is a win for color, a -1 for a loss
 
@@ -89,7 +89,9 @@ class GoBoardUtil(object):
         """
         opponent_color = GoBoardUtil.opponent(color)
 
-        if board.get_winner() == color:
+        if board in tTable:
+            return tTable[board]
+        elif board.get_winner() == color:
             return 1
         elif board.get_winner() == opponent_color:
             return -1
@@ -111,10 +113,13 @@ class GoBoardUtil(object):
                 board_copy = board.copy()
                 board_copy.move(move, color)
 
-                move_value = - GoBoardUtil.value(board_copy, opponent_color)
+                move_value = - GoBoardUtil.value(board_copy, opponent_color, tTable) 
                 if not best_value or move_value < best_value:
                     best_value = move_value
+                if best_value == 1:
+                    break
 
+            tTable[board_copy] = best_value
             return best_value
             
 

@@ -50,7 +50,7 @@ class GoBoardUtil(object):
         color : {'b','w'}
             the color to generate the move for.
         """
-        best_value, best_move = value(board, color)
+        best_value, best_move = GoBoardUtil.value(board, color)
 
         return best_move
 
@@ -75,7 +75,6 @@ class GoBoardUtil(object):
         elif board.get_winner() == opponent_color:
             return -1, None
         else:
-
             best_value = None
             best_move = None
             moves = board.get_empty_positions(color)
@@ -100,7 +99,7 @@ class GoBoardUtil(object):
                 if best_value == 1:
                     break
 
-            tTable[board_copy] = (best_value, best_move)
+            tTable[board] = (best_value, best_move)
             return best_value, best_move
             
 

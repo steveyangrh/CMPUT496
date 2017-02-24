@@ -71,8 +71,10 @@ class GoBoardUtil(object):
         if board in tTable:
             return tTable[board]
         elif board.get_winner() == color:
+            print('\n' + str(board.get_twoD_board()) + '\n' + str(color) + ':1')
             return 1, None
         elif board.get_winner() == opponent_color:
+            print('\n' + str(board.get_twoD_board()) + '\n' + str(color) + ':-1')
             return -1, None
         else:
             best_value = None
@@ -93,13 +95,14 @@ class GoBoardUtil(object):
                 board_copy.move(move, color)
 
                 move_value = - GoBoardUtil.value(board_copy, opponent_color, tTable)[0]
-                if not best_value or move_value < best_value:
+                if best_value is None or best_value < move_value:
+                    print('\n' + str(board.get_twoD_board()) + '\n' + str(color) + ':' + str(move_value) + '(' + str(best_value) + ')')
                     best_value = move_value
                     best_move = move
                 if best_value == 1:
                     break
-
-            tTable[board] = (best_value, best_move)
+            
+            #tTable[board] = (best_value, best_move)
             return best_value, best_move
             
 

@@ -36,7 +36,88 @@ class GoBoardUtil(object):
             gtp_moves.append(GoBoardUtil.format_point((x, y)))
         sorted_moves = ' '.join(sorted(gtp_moves))
         return sorted_moves
+
+    @staticmethod
+    def generate_best_move(board, color):
+        """
+        generate the best move, or a random move if the time limit
+        is exceeded.
+
+        Arguments
+        ---------
+        board : np.array
+            a SIZExSIZE array representing the board
+        color : {'b','w'}
+            the color to generate the move for.
+        """
+        best_move = None
+        best_value = None
+        
+        moves = board.get_empty_positions(color)
+        num_moves = len(moves)
+        illegal_moves = []
+
+        for i in range(num_moves):
+            if board.check_legal(moves[i], color):
+                continue
+            else:
+                illegal_moves.append(i)
+        legal_moves = np.delete(moves, illegal_moves)
+        
+        for move in legal_moves:
+            board_copy = board.copy()
+            board_copy.move(move, color)
+
+            move_value = GoBoardUtil.value(board_copy, color)
+            if not best_value or move_value < best_value:
+                best_value = move_value
+                best_move = move
+
+        return best_move
+
+    @staticmethod
+    def value(board, color):
+        """
+        Return a 1 if it is a win for color, a -1 for a loss
+
+        Arguments
+        ---------
+        board : np.array
+            a SIZExSIZE array representing the board
+        color_to_play : {'b','w'}
+            the color to generate the move for.
+        """
+        opponent_color = GoBoardUtil.opponent(color)
+
+        if board.get_winner() == color:
+            return 1
+        elif board.get_winner() == opponent_color:
+            return -1
+        else:
+
+            best_value = None
+            moves = board.get_empty_positions(color)
+            num_moves = len(moves)
+            illegal_moves = []
+
+            for i in range(num_moves):
+                if board.check_legal(moves[i], color):
+                    continue
+                else:
+                    illegal_moves.append(i)
+            legal_moves = np.delete(moves, illegal_moves)
+
+            for move in legal_moves:
+                board_copy = board.copy()
+                board_copy.move(move, color)
+
+                move_value = - GoBoardUtil.value(board_copy, opponent_color)
+                if not best_value or move_value < best_value:
+                    best_value = move_value
+
+            return best_value
             
+
     @staticmethod       
     def generate_random_move(board, color):
         """

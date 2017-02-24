@@ -18,7 +18,7 @@ class RandomPlayer():
         self.name = "NoGo2"
         self.version = 0.1
     def get_move(self, board, color):
-        return GoBoardUtil.generate_random_move(board, color)
+        return GoBoardUtil.generate_best_move(board, color)
     
 
 def run():

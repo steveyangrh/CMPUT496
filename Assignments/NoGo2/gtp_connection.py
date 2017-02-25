@@ -33,6 +33,7 @@ class GtpConnection():
         self.go_engine = go_engine
         self.komi = 0
         self.board = GoBoard(7)
+        self.MaxTime =1;
         self.commands = {
             "protocol_version": self.protocol_version_cmd,
             "quit": self.quit_cmd,
@@ -284,13 +285,21 @@ class GtpConnection():
     # Processing time out comand 
     def timeout_cmd(self, args):
         
-        self.board.MaxTime = int(args[0])
+        self.MaxTime = int(args[0])
         
         self.respond('MaxTime: ' + str(self.board.MaxTime))
     # Solve game for current player    
     def solve_cmd(self, args):
        
-        value, move = GoBoardUtil.value(self.board, self.board.to_play)
+       
+        '''
+        timeoutAlphaBetaCall = timeout(self.MaxTime, self.alphaBetaCall, (None, None))
+        win, position = timeoutAlphaBetaCall(color)
+        '''
+       
+        # adding time out
+        GoBoardUtil_value = timeout(self.MaxTime, GoBoardUtil.value, (None, None))
+        value, move = GoBoardUtil_value (self.board, self.board.to_play)
 
         if value == None:
             self.respond('\nunknown\n')

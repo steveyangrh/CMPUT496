@@ -19,7 +19,7 @@ class RandomPlayer():
         self.version = 0.1
         self.timeout = -1
     def get_move(self, board, color):
-        if self.timeout > 0:
+        if self.timeout >= 0:
             f = timeout(self.timeout, GoBoardUtil.generate_best_move, GoBoardUtil.generate_random_move(board, color))
         else:
             f = GoBoardUtil.generate_best_move

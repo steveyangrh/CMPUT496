@@ -367,7 +367,7 @@ class GtpConnection():
             color = GoBoardUtil.color_to_int(board_color)
             move = self.go_engine.get_move(self.board, color)
             if move is None:
-                self.respond("pass")
+                self.respond("resign")
                 return
 
             if not self.board.check_legal(move, color):

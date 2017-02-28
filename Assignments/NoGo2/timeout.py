@@ -5,13 +5,15 @@ def timeout(MaxTime, func, failure):
     def handler(signum, other):
         raise Exception('Time is up')       
     
-    signal.alarm(MaxTime)
-    signal.signal(signal.SIGALRM, handler)
-            
     def wrapped(*args, **kwargs):
+        signal.signal(signal.SIGALRM, handler)
+        signal.alarm(MaxTime)
         try:
-            return func(*args, **kwargs)
+            result = func(*args, **kwargs)
         except:
-            return failure
+            result = failure
+        finally:
+            signal.alarm(0)
+        return result
         
     return wrapped

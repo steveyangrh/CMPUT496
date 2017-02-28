@@ -55,7 +55,7 @@ class GoBoardUtil(object):
         return best_move
 
     @staticmethod
-    def value(board, color, tTable=None):
+    def value(board, color, tTable={}):
         """
         Return a 1 if it is a win for color, a -1 for a loss
 
@@ -66,8 +66,6 @@ class GoBoardUtil(object):
         color_to_play : {'b','w'}
             the color to generate the move for.
         """
-        if tTable is None:
-            tTable = {}
 
         opponent_color = GoBoardUtil.opponent(color)
 

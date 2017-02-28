@@ -51,7 +51,7 @@ class GtpConnection():
             "final_score": self.final_score_cmd,
             "legal_moves": self.legal_moves_cmd,
             "solve": self.solve_cmd,
-            "timeout": self.timeout_cmd
+            "timelimit": self.timeout_cmd
         }
 
         # used for argument checking

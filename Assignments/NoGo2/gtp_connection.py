@@ -286,7 +286,7 @@ class GtpConnection():
     def timeout_cmd(self, args):
         
         self.MaxTime = int(args[0])
-        
+        self.go_engine.timeout = self.MaxTime
         self.respond('MaxTime: ' + str(self.MaxTime))
     # Solve game for current player    
     def solve_cmd(self, args):

@@ -3,7 +3,7 @@ import signal
 # When MaxTime is up, print out
 def timeout(MaxTime, func, failure):
     def handler(signum, other):
-        print ('Time is up')       
+        raise Exception('Time is up')       
     
     signal.alarm(MaxTime)
     signal.signal(signal.SIGALRM, handler)
@@ -15,4 +15,3 @@ def timeout(MaxTime, func, failure):
             return failure
         
     return wrapped
-

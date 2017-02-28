@@ -287,7 +287,7 @@ class GtpConnection():
         
         self.MaxTime = int(args[0])
         
-        self.respond('MaxTime: ' + str(self.board.MaxTime))
+        self.respond('MaxTime: ' + str(self.MaxTime))
     # Solve game for current player    
     def solve_cmd(self, args):
        

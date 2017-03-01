@@ -70,7 +70,7 @@ boardsize 2
 clear_board
 play b b2
 60 solve
-#?[b a1]
+#?[b]
 
 boardsize 4
 clear_board
@@ -106,7 +106,7 @@ play w d2
 play b c4
 play w c5
 80 solve
-#?[w a4]
+#?[w]
 
 
 boardsize 3

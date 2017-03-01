@@ -309,11 +309,10 @@ class GtpConnection():
             else:
                 color = GoBoardUtil.opponent(self.board.to_play)
             
-            PrintMessage='\n' + str(GoBoardUtil.int_to_color(color)) \
-                            +' '  \
-                            + str(GoBoardUtil.format_point(self.board._point_to_coord(move))) \
-                            + '\n' 
-            
+            PrintMessage= '\n' + str(GoBoardUtil.int_to_color(color))
+            if value == 1:
+                PrintMessage = PrintMessage + ' ' + str(GoBoardUtil.format_point(self.board._point_to_coord(move)))
+            PrintMessage = PrintMessage + '\n'
                              
             self.respond(PrintMessage)
     ###########################################        

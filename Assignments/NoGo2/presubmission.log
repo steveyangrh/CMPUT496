@@ -1,0 +1,11 @@
+Script started on Tue 28 Feb 2017 11:29:35 PM MST
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignmentssampley@miranda:~/Documents/CMPUT496/git/Assignments$ cp a2.tgz presubmission/
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignmentssampley@miranda:~/Documents/CMPUT496/git/Assignments$ cd presubmission/
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/presubmissionsampley@miranda:~/Documents/CMPUT496/git/Assignments/presubmission$ tar -xzf a2.ttgz 
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/presubmissionsampley@miranda:~/Documents/CMPUT496/git/Assignments/presubmission$ cd NoGo2/
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/presubmission/NoGo2sampley@miranda:~/Documents/CMPUT496/git/Assignments/presubmission/NoGo2$ gogui- regress "python Go1.py" a2-sample.gtp 
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/presubmission/NoGo2sampley@miranda:~/Documents/CMPUT496/git/Assignments/presubmission/NoGo2$ gogui-rregress "python Go1.py" a2-sample.gtp [K[K[K[K[K[K[K[K[K[K[K[K[K[Knogosolvertest.gtp
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/presubmission/NoGo2sampley@miranda:~/Documents/CMPUT496/git/Assignments/presubmission/NoGo2$ exit
+exit
+
+Script done on Tue 28 Feb 2017 11:32:06 PM MST

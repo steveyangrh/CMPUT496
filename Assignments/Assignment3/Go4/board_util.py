@@ -82,9 +82,27 @@ class GoBoardUtil(object):
         """
         pattern_moves = GoBoardUtil.generate_pattern_moves(board)
         pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
+        
+        atari_capture_moves = GoBoardUtil.generate_atari_capture_moves(board)
+        atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
+        
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"
         return GoBoardUtil.generate_random_moves(board), "Random"
+
+
+    @staticmethod
+    def generate_atari_capture_moves(board):
+        color = board.current_player
+        moves = []
+        return moves
+
+    @staticmethod
+    def generate_atari_defense_moves(board):
+        color = board.current_player
+        moves = []
+        return moves
+
 
     @staticmethod
     def generate_random_moves(board):

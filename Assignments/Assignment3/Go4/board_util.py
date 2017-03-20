@@ -84,7 +84,9 @@ class GoBoardUtil(object):
         pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
         
         atari_capture_moves = GoBoardUtil.generate_atari_capture_moves(board)
+        atari_capture_moves = GoBoardUtil.filter_moves(board, atari_capture_moves, check_selfatari)
         atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
+        atari_defense_moves = GoBoardUtil.filter_moves(board, atari_defense_moves, check_selfatari)
 
             
         if len(atari_capture_moves) > 0:
@@ -102,6 +104,13 @@ class GoBoardUtil(object):
 
     @staticmethod
     def generate_atari_capture_moves(board):
+        color = board.current_player
+        '''
+        if color == 1:
+            color = 'b'
+        else:
+            color = 'w'
+        '''
         moves = []
         last_move = board.last_move
         if last_move is None:
@@ -146,6 +155,11 @@ class GoBoardUtil(object):
         moves=unique_moves;
 
         if len(moves)==1:
+            final_moves = []
+            for al in moves:
+                if board.check_legal(al,color):
+                    final_moves.append(al)
+            moves = final_moves;
             return moves
             #respond(self, response = ''):
 
@@ -249,7 +263,14 @@ class GoBoardUtil(object):
         for i in moves:
             if i not in unique_moves:
                 unique_moves.append(i)
-        moves=unique_moves;      
+        moves=unique_moves; 
+
+        final_moves = []
+        color = board.current_player
+        for al in moves:
+            if board.check_legal(al,color):
+                final_moves.append(al)
+        moves = final_moves;     
         return moves
 
 

@@ -378,6 +378,9 @@ class GoBoard(object):
         flood_list=[point]
         color = fboard[point]
         fboard[point] = FLOODFILL
+        #print ("fboard: " )
+        #print (flood_list)
+        
         while flood_list:
             current_point = flood_list.pop()
             neighbors = self._neighbors(current_point)
@@ -385,6 +388,10 @@ class GoBoard(object):
                 if fboard[n] == color:
                     fboard[n] = FLOODFILL
                     flood_list.append(n)
+                    '''    
+                    row,col = board._point_to_coord(n)
+                    print ("Coor flood: " + str([row,col]))
+                    '''
         return fboard
 
 

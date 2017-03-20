@@ -1,6 +1,8 @@
-boardsize 3
+boardsize 2
 clear_board
-play b b2 
+play b a1
+play b a2
+play b b1
 policy_moves
 
 boardsize 5

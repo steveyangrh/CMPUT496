@@ -98,31 +98,37 @@ class GoBoardUtil(object):
         #print ("last_move:")
         #print (last_move)
         
-        fboard = board._flood_fill(last_move)
-        has_liberty = board._liberty_flood(fboard)
+        fboard_array = board._flood_fill(last_move)
+        board_copy_array= np.array(board.board, copy=True)
+
+        #print ("board arr: ")
+        #print(board_copy_array)
+        has_liberty = board._liberty_flood(fboard_array)
         if not has_liberty:
             return moves
         else:
-            inds = list(*np.where(fboard == FLOODFILL))
+            inds = list(*np.where(fboard_array == FLOODFILL))
             total_liberty = 0
             for f in inds:
                  
                 f_neighbors = board._neighbors(f)
                 
 
-                #print(f_neighbors) 
+                #print(f_neighbors)
+                
                 for n in f_neighbors:
+                    if board_copy_array[n]==EMPTY:
 
-                    #row,col = board._point_to_coord(n)
-                    #print ("Coor neighbors: " + str([row,col]))
-                    
-                    if board[n]==EMPTY:
                         
+                        row,col = board._point_to_coord(n)
+                        #print ("Coor n: " + str([row,col]))
+                        #print ("leber: " +str(total_liberty))
                         total_liberty = total_liberty + 1
                         moves.append(n)
                     
         if total_liberty==1:
             return moves
+            
         moves = []    
         return moves
     
@@ -130,7 +136,7 @@ class GoBoardUtil(object):
     def generate_atari_defense_moves(board):
         color = board.current_player
         last_move = board.last_move
-        
+        moves=[]
         return moves
 
 

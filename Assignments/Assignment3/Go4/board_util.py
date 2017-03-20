@@ -171,11 +171,14 @@ class GoBoardUtil(object):
                                 total_liberty = total_liberty + 1
                                 temp_moves.append(n)
 
-                    if total_liberty == 1:
+                    temp_unique_moves=[]
+                    for i in temp_moves:
+                        if i not in temp_unique_moves:
+                            temp_unique_moves.append(i)
+                    temp_moves=temp_unique_moves
+                    if(len(temp_moves)==1):
                         moves.extend(temp_moves)
-                    else:
-                        temp_moves = []
-
+                
         unique_moves=[]
         for i in moves:
             if i not in unique_moves:

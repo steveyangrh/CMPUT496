@@ -149,7 +149,7 @@ class GoBoardUtil(object):
         moves = []
         last_move = board.last_move
         last_move_neighbors = board._neighbors(last_move)
-        for al in last_move_neighbors
+        for al in last_move_neighbors:
             if (board._points_color(al) == color):
                 fboard_array = board._flood_fill(al)
                 board_copy_array= np.array(board.board, copy=True)

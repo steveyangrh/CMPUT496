@@ -166,6 +166,8 @@ class GoBoardUtil(object):
             color = 'w'
         moves = []
 
+        opponent_holder = []
+
         last_move = board.last_move
         if last_move is None:
             return moves
@@ -193,7 +195,12 @@ class GoBoardUtil(object):
                             for n in f_neighbors:
                                 if board_copy_array[n]==EMPTY:     
                                     temp_moves.append(n)
-
+                                if color == 'w':
+                                    if board_copy_array[n]== BLACK:
+                                        opponent_holder.append(n)
+                                if color == 'b':
+                                    if board_copy_array[n]== WHITE:
+                                        opponent_holder.append(n)
                     temp_unique_moves=[]
                     for i in temp_moves:
                         if i not in temp_unique_moves:
@@ -207,6 +214,42 @@ class GoBoardUtil(object):
             if i not in unique_moves:
                 unique_moves.append(i)
         moves=unique_moves;
+
+        unique_opponent_moves=[]
+        for i in opponent_holder:
+            if i not in unique_opponent_moves:
+                unique_opponent_moves.append(i)
+        opponent_holder=unique_opponent_moves;
+
+        for o in opponent_holder:
+            fboard_array = board._flood_fill(o)
+            board_copy_array = np.array(board.board, copy=True)
+            has_liberty = board._liberty_flood(fboard_array)
+            if not has_liberty:
+                pass
+            else:
+                inds = list(*np.where(fboard_array == FLOODFILL))
+                #inds are the FLOODFILLs
+                temp_moves = []
+                for f in inds:
+                    if f is not None:
+                        f_neighbors = board._neighbors(f)
+                        for n in f_neighbors:
+                            if board_copy_array[n]==EMPTY:     
+                                temp_moves.append(n)
+                    temp_unique_moves=[]
+                    for i in temp_moves:
+                        if i not in temp_unique_moves:
+                            temp_unique_moves.append(i)
+                    temp_moves=temp_unique_moves
+                    if(len(temp_moves)==1):
+                        moves.extend(temp_moves)
+          
+        unique_moves=[]
+        for i in moves:
+            if i not in unique_moves:
+                unique_moves.append(i)
+        moves=unique_moves;      
         return moves
 
 

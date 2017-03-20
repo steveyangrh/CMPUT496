@@ -84,21 +84,19 @@ class GoBoardUtil(object):
         pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
         
         atari_capture_moves = GoBoardUtil.generate_atari_capture_moves(board)
-        #atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
+        atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
 
             
         if len(atari_capture_moves) > 0:
             return atari_capture_moves, "AtariCapture"
-        #if len(atari_defense_moves) > 0:
-        #    return atari_defense_moves, "AtariDefense"
+
+        if len(atari_defense_moves) > 0:
+            return atari_defense_moves, "AtariDefense"
         
 
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"
-
-              #GoBoardUtil.generate_random_moves(boa
-
-        #print ("err1: " + str(board))          
+            
         return GoBoardUtil.generate_random_moves(board), "Random"
 
 
@@ -164,6 +162,11 @@ class GoBoardUtil(object):
         color = board.current_player
         moves = []
         last_move = board.last_move
+        print ("last_move: ")
+        
+        if last_move is None:
+            return moves 
+        
         last_move_neighbors = board._neighbors(last_move)
         for al in last_move_neighbors:
             if (board._points_color(al) == color):

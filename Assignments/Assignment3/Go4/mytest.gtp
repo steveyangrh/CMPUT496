@@ -22,3 +22,13 @@ play w c2
 
 play b d4
 policy_moves
+
+## Testing defense
+boardsize 5
+clear_board
+
+play b e5
+play w d5
+ policy_moves
+
+#? [AtariDefense e4]

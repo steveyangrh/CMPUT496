@@ -91,8 +91,7 @@ class GoBoardUtil(object):
             return atari_capture_moves, "AtariCapture"
         #if len(atari_defense_moves) > 0:
         #    return atari_defense_moves, "AtariDefense"
-        if len(atari_defense_moves) > 0:
-            return atari_defense_moves, "AtariDefense"
+        
 
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"

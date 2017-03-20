@@ -95,7 +95,7 @@ class GoBoardUtil(object):
     def generate_atari_capture_moves(board):
         moves = []
         last_move = board.last_move
-        fboard = board.floodfill(last_move)
+        fboard = board._flood_fill(last_move)
         has_liberty = board._liberty_flood(fboard)
         if not has_liberty:
             return moves
@@ -103,20 +103,25 @@ class GoBoardUtil(object):
             inds = list(*np.where(fboard == FLOODFILL))
             total_liberty = 0
             for f in inds:
-                print("f_neighbors:.................") 
+                 
                 f_neighbors = board._neighbors(f)
                 
                 print(f_neighbors) 
                 for n in f_neighbors:
+
+                    print ("neighbors:")
+                    print(n)
+                    '''
                     if board[n]==EMPTY:
+                        
                         total_liberty = total_liberty + 1
                         moves.append(n)
-                
+                    '''
         if total_liberty==1:
             return moves
         moves = []    
         return moves
-
+    
     @staticmethod
     def generate_atari_defense_moves(board):
         color = board.current_player

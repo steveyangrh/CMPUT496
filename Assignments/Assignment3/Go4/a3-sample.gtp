@@ -1,3 +1,7 @@
+boardsize 2
+clear_board
+policy_moves
+
 boardsize 5
 clear_board
 

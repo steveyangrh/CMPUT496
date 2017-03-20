@@ -141,24 +141,35 @@ class GoBoardUtil(object):
     def respond(self, response = ''):
         """ Send msg to stdout """
         sys.stdout.write('= {}\n\n'.format(response)); sys.stdout.flush()
-   
-    
+
+
     @staticmethod
     def generate_atari_defense_moves(board):
         color = board.current_player
         last_move = board.last_move
-        moves=[]
-        return moves
+        last_move_neighbors = board._neighbors(last_move)
+        for al in last_move_neighbors
+            if (board._points_color(al) == color):
+                fboard_array = board._flood_fill(al)
+                board_copy_array= np.array(board.board, copy=True)
+                has_liberty = board._liberty_flood(fboard_array)
+                if not has_liberty:
+                    pass
+                else:
+                    inds = list(*np.where(fboard_array == FLOODFILL))
+                    total_liberty = 0
+                    temp_moves = []
+                    for f in inds:
+                        f_neighbors = board._neighbors(f)
+                
+                        for n in f_neighbors:
+                            if board_copy_array[n]==EMPTY:     
+                                total_liberty = total_liberty + 1
+                                temp_moves.append(n)
 
+                    if total_liberty == 1:
+                        moves.extend(temp_moves)
 
-    @staticmethod
-    def generate_random_moves(board):
-        empty_points = board.get_empty_points()
-        color = board.current_player
-        moves = []
-        for move in empty_points:
-            if board.check_legal(move, color) and not board.is_eye(move, color):
-                moves.append(move)
         return moves
 
     @staticmethod

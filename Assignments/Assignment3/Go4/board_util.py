@@ -85,9 +85,16 @@ class GoBoardUtil(object):
         
         atari_capture_moves = GoBoardUtil.generate_atari_capture_moves(board)
         atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
+
+        #print ("atari_cpture_moves")
+        #print (atari_capture_moves) 
         
+        if len(atari_capture_moves) > 0:
+            return atari_capture_moves, "AtariCapture"
+
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"
+            
         return GoBoardUtil.generate_random_moves(board), "Random"
 
 
@@ -125,12 +132,33 @@ class GoBoardUtil(object):
                         #print ("leber: " +str(total_liberty))
                         total_liberty = total_liberty + 1
                         moves.append(n)
-                    
-        if total_liberty==1:
-            return moves
-            
-        moves = []    
+        #print ("total_liberty:")
+        #print (total_liberty)
+
+        #remove duplications
+        unique_moves=[]
+        for i in moves:
+            if i not in unique_moves:
+                unique_moves.append(i)
+        moves=unique_moves;
+
+        '''
+        print ("moves:")
+        print (moves)
         return moves
+        '''
+         
+        if len(moves)==1:
+            return moves
+            #respond(self, response = ''):
+
+        moves = []
+        return moves         
+
+    def respond(self, response = ''):
+        """ Send msg to stdout """
+        sys.stdout.write('= {}\n\n'.format(response)); sys.stdout.flush()
+   
     
     @staticmethod
     def generate_atari_defense_moves(board):

@@ -1,3 +1,8 @@
+boardsize 3
+clear_board
+play b b2 
+policy_moves
+
 boardsize 5
 clear_board
 

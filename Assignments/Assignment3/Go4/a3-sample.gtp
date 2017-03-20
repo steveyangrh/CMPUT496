@@ -1,5 +1,9 @@
 boardsize 2
 clear_board
+play b a1
+play b a2
+play w b1
+
 policy_moves
 
 boardsize 5

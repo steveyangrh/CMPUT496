@@ -468,6 +468,9 @@ class GoBoard(object):
             coordinate of points which are neighbors of the given point
         """
         #row,col = self._point_to_coord(point)
+        #row,col = self._point_to_coord(point)
+        #print ("Coor neighbors: " + str([row,col]))
+        
         #if 0 <= row <= self.size+1 and 0 <= col <= self.size+1:
         return [point-1, point+1, point-self.NS, point+self.NS]
         #else:

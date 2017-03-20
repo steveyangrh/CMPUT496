@@ -90,6 +90,9 @@ class GoBoardUtil(object):
         if len(atari_capture_moves) > 0:
             return atari_capture_moves, "AtariCapture"
 
+        if len(atari_defense_moves) > 0:
+            return atari_defense_moves, "AtariDefense"
+
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"
             
@@ -170,7 +173,14 @@ class GoBoardUtil(object):
 
                     if total_liberty == 1:
                         moves.extend(temp_moves)
+                    else:
+                        temp_moves = []
 
+        unique_moves=[]
+        for i in moves:
+            if i not in unique_moves:
+                unique_moves.append(i)
+        moves=unique_moves;
         return moves
 
     @staticmethod

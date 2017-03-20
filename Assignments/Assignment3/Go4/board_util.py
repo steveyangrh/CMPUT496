@@ -86,9 +86,7 @@ class GoBoardUtil(object):
         atari_capture_moves = GoBoardUtil.generate_atari_capture_moves(board)
         atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
 
-        #print ("atari_cpture_moves")
-        #print (atari_capture_moves) 
-        
+
         if len(atari_capture_moves) > 0:
             return atari_capture_moves, "AtariCapture"
 
@@ -102,14 +100,10 @@ class GoBoardUtil(object):
     def generate_atari_capture_moves(board):
         moves = []
         last_move = board.last_move
-        #print ("last_move:")
-        #print (last_move)
         
         fboard_array = board._flood_fill(last_move)
         board_copy_array= np.array(board.board, copy=True)
 
-        #print ("board arr: ")
-        #print(board_copy_array)
         has_liberty = board._liberty_flood(fboard_array)
         if not has_liberty:
             return moves
@@ -118,10 +112,7 @@ class GoBoardUtil(object):
             total_liberty = 0
             for f in inds:
                  
-                f_neighbors = board._neighbors(f)
-                
-
-                #print(f_neighbors)
+                f_neighbors = board._neighbors(f)                         
                 
                 for n in f_neighbors:
                     if board_copy_array[n]==EMPTY:
@@ -131,9 +122,7 @@ class GoBoardUtil(object):
                         #print ("Coor n: " + str([row,col]))
                         #print ("leber: " +str(total_liberty))
                         total_liberty = total_liberty + 1
-                        moves.append(n)
-        #print ("total_liberty:")
-        #print (total_liberty)
+                        moves.append(n)       
 
         #remove duplications
         unique_moves=[]
@@ -142,12 +131,6 @@ class GoBoardUtil(object):
                 unique_moves.append(i)
         moves=unique_moves;
 
-        '''
-        print ("moves:")
-        print (moves)
-        return moves
-        '''
-         
         if len(moves)==1:
             return moves
             #respond(self, response = ''):

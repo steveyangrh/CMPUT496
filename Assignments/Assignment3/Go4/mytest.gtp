@@ -1,0 +1,16 @@
+boardsize 5
+clear_board
+
+play b e5
+play w d5
+play b e4
+play w e3
+play b d4
+play w c4
+play b a3
+play w d3
+play b c3
+play w c2
+
+
+play b d4

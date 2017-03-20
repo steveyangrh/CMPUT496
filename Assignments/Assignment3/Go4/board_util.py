@@ -103,12 +103,15 @@ class GoBoardUtil(object):
             inds = list(*np.where(fboard == FLOODFILL))
             total_liberty = 0
             for f in inds:
+                print("f_neighbors:.................") 
                 f_neighbors = board._neighbors(f)
-                for n in f_neighbors
+                
+                print(f_neighbors) 
+                for n in f_neighbors:
                     if board[n]==EMPTY:
                         total_liberty = total_liberty + 1
                         moves.append(n)
-
+                
         if total_liberty==1:
             return moves
         moves = []    

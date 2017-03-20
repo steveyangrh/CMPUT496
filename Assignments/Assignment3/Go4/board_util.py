@@ -146,6 +146,7 @@ class GoBoardUtil(object):
     @staticmethod
     def generate_atari_defense_moves(board):
         color = board.current_player
+        moves = []
         last_move = board.last_move
         last_move_neighbors = board._neighbors(last_move)
         for al in last_move_neighbors

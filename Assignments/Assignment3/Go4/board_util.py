@@ -84,18 +84,26 @@ class GoBoardUtil(object):
         pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
         
         atari_capture_moves = GoBoardUtil.generate_atari_capture_moves(board)
-        atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
+        #atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
 
-
+            
         if len(atari_capture_moves) > 0:
             return atari_capture_moves, "AtariCapture"
 
+<<<<<<< HEAD
+        #if len(atari_defense_moves) > 0:
+        #    return atari_defense_moves, "AtariDefense"
+=======
         if len(atari_defense_moves) > 0:
             return atari_defense_moves, "AtariDefense"
+>>>>>>> 4a86fae42d04f61a953e64ad2f1424f597528a84
 
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"
-            
+
+              #GoBoardUtil.generate_random_moves(boa
+
+        #print ("err1: " + str(board))          
         return GoBoardUtil.generate_random_moves(board), "Random"
 
 
@@ -103,7 +111,10 @@ class GoBoardUtil(object):
     def generate_atari_capture_moves(board):
         moves = []
         last_move = board.last_move
-        
+        if last_move is None:
+            return moves 
+
+          
         fboard_array = board._flood_fill(last_move)
         board_copy_array= np.array(board.board, copy=True)
 
@@ -114,9 +125,16 @@ class GoBoardUtil(object):
             inds = list(*np.where(fboard_array == FLOODFILL))
             total_liberty = 0
             for f in inds:
-                 
+
+
+                if f is None:
+                    return []                  
+
                 f_neighbors = board._neighbors(f)                         
-                
+                if f_neighbors is None:
+                    return []
+
+
                 for n in f_neighbors:
                     if board_copy_array[n]==EMPTY:
 
@@ -202,6 +220,16 @@ class GoBoardUtil(object):
                     moves[index] = moves[lastIndex]
                 moves.pop()
         return None
+    
+    @staticmethod
+    def generate_random_moves(board):
+        empty_points = board.get_empty_points()
+        color = board.current_player
+        moves = []
+        for move in empty_points:
+            if board.check_legal(move, color) and not board.is_eye(move, color):
+                moves.append(move)
+        return moves
 
     @staticmethod
     def filter_moves(board, moves, check_selfatari):

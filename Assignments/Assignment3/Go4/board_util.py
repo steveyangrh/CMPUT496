@@ -161,11 +161,66 @@ class GoBoardUtil(object):
     def generate_atari_defense_moves(board):
         color = board.current_player
         moves = []
-        last_move = board.last_move
-        print ("last_move: ")
-        
+
+        # second last move
+        last_move = board.last2_move
         if last_move is None:
-            return moves 
+            return moves
+
+        fboard_array = board._flood_fill(last_move)
+        board_copy_array= np.array(board.board, copy=True)
+
+        has_liberty = board._liberty_flood(fboard_array)
+        if not has_liberty:
+            return moves
+        else:
+            inds = list(*np.where(fboard_array == FLOODFILL))
+            total_liberty = 0
+            for f in inds:
+
+
+                if f is None:
+                    return []                  
+
+                f_neighbors = board._neighbors(f)                         
+                if f_neighbors is None:
+                    return []
+
+
+                for n in f_neighbors:
+                    if board_copy_array[n]==EMPTY:
+
+                        
+                        row,col = board._point_to_coord(n)
+                        #print ("Coor n: " + str([row,col]))
+                        #print ("leber: " +str(total_liberty))
+                        total_liberty = total_liberty + 1
+                        moves.append(n)       
+
+        #remove duplications
+        unique_moves=[]
+        for i in moves:
+            if i not in unique_moves:
+                unique_moves.append(i)
+        moves=unique_moves;
+
+        if len(moves)==1:
+            return moves
+            #respond(self, response = ''):
+
+        moves = []
+        return moves
+        
+
+        '''
+        print ("last_move2: ")
+        print (last_move)
+        row,col = board._point_to_coord(last_move)
+        print ("Coor n: " + str([row,col]))
+        '''
+        
+
+        '''
         
         last_move_neighbors = board._neighbors(last_move)
         for al in last_move_neighbors:
@@ -201,7 +256,7 @@ class GoBoardUtil(object):
                 unique_moves.append(i)
         moves=unique_moves;
         return moves
-
+        '''
     @staticmethod
     def generate_random_move(board):
         color = board.current_player

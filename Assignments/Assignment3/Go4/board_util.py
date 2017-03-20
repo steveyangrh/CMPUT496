@@ -160,8 +160,58 @@ class GoBoardUtil(object):
     @staticmethod
     def generate_atari_defense_moves(board):
         color = board.current_player
+        if color == 1:
+            color = 'b'
+        else:
+            color = 'w'
         moves = []
 
+        last_move = board.last_move
+        if last_move is None:
+            return moves
+        
+
+        last_move_neighbors = board._neighbors(last_move)
+        '''
+        print(last_move)
+        print(last_move_neighbors)
+        '''
+        for al in last_move_neighbors: #al are the neighbors of the last move(opponent)
+            if (board._points_color(al) == color): 
+                fboard_array = board._flood_fill(al)
+                board_copy_array = np.array(board.board, copy=True)
+                has_liberty = board._liberty_flood(fboard_array)
+                if not has_liberty:
+                    pass
+                else:
+                    inds = list(*np.where(fboard_array == FLOODFILL))
+                    #inds are the FLOODFILLs
+                    temp_moves = []
+                    for f in inds:
+                        if f is not None:
+                            f_neighbors = board._neighbors(f)
+                            for n in f_neighbors:
+                                if board_copy_array[n]==EMPTY:     
+                                    temp_moves.append(n)
+
+                    temp_unique_moves=[]
+                    for i in temp_moves:
+                        if i not in temp_unique_moves:
+                            temp_unique_moves.append(i)
+                    temp_moves=temp_unique_moves
+                    if(len(temp_moves)==1):
+                        moves.extend(temp_moves)
+                
+        unique_moves=[]
+        for i in moves:
+            if i not in unique_moves:
+                unique_moves.append(i)
+        moves=unique_moves;
+        return moves
+
+
+
+        '''
         # second last move
         last_move = board.last2_move
         if last_move is None:
@@ -210,7 +260,7 @@ class GoBoardUtil(object):
 
         moves = []
         return moves
-        
+        '''
 
         '''
         print ("last_move2: ")
@@ -220,43 +270,7 @@ class GoBoardUtil(object):
         '''
         
 
-        '''
         
-        last_move_neighbors = board._neighbors(last_move)
-        for al in last_move_neighbors:
-            if (board._points_color(al) == color):
-                fboard_array = board._flood_fill(al)
-                board_copy_array= np.array(board.board, copy=True)
-                has_liberty = board._liberty_flood(fboard_array)
-                if not has_liberty:
-                    pass
-                else:
-                    inds = list(*np.where(fboard_array == FLOODFILL))
-                    total_liberty = 0
-                    temp_moves = []
-                    for f in inds:
-                        f_neighbors = board._neighbors(f)
-                
-                        for n in f_neighbors:
-                            if board_copy_array[n]==EMPTY:     
-                                total_liberty = total_liberty + 1
-                                temp_moves.append(n)
-
-                    temp_unique_moves=[]
-                    for i in temp_moves:
-                        if i not in temp_unique_moves:
-                            temp_unique_moves.append(i)
-                    temp_moves=temp_unique_moves
-                    if(len(temp_moves)==1):
-                        moves.extend(temp_moves)
-                
-        unique_moves=[]
-        for i in moves:
-            if i not in unique_moves:
-                unique_moves.append(i)
-        moves=unique_moves;
-        return moves
-        '''
     @staticmethod
     def generate_random_move(board):
         color = board.current_player

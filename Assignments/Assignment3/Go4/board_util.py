@@ -370,6 +370,14 @@ class GoBoardUtil(object):
             if not GoBoardUtil.filter(board,move,color,check_selfatari):
                 good_moves.append(move)
         return good_moves
+    # return True if move should be filtered
+    @staticmethod
+    def filter(board, move, color, check_selfatari):
+        if check_selfatari:
+            return GoBoardUtil.selfatari_filter(board, move, color)
+        else:
+            return GoBoardUtil.filleye_filter(board, move, color)
+
 
     # return True if move should be filtered
     @staticmethod
@@ -384,13 +392,6 @@ class GoBoardUtil(object):
                or GoBoardUtil.selfatari(board, move, color)
                )
 
-    # return True if move should be filtered
-    @staticmethod
-    def filter(board, move, color, check_selfatari):
-        if check_selfatari:
-            return GoBoardUtil.selfatari_filter(board, move, color)
-        else:
-            return GoBoardUtil.filleye_filter(board, move, color)
 
     @staticmethod 
     def filter_moves_and_generate(board, moves, check_selfatari):

@@ -399,7 +399,14 @@ class GtpConnection():
                 raise RuntimeError("Illegal move given by engine")
 
             # move is legal; play it
+
+            #################
+            ## Genmove based on our policy
+            
             self.board.move(move, color)
+
+
+            #################
             self.debug_msg("Move: {}\nBoard: \n{}\n".format(move, str(self.board.get_twoD_board())))
             move = self.board._point_to_coord(move)
             board_move = GoBoardUtil.format_point(move)

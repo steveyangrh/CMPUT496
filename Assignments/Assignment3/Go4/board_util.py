@@ -20,7 +20,14 @@ class GoBoardUtil(object):
             raise TypeError('Unexpected **kwargs: %r' % kwargs)
         numPass = 0
         for _ in range(limit):
-            move = GoBoardUtil.generate_move_with_filter(board,pattern,check_selfatari)
+
+            # Modify for gtp cmd
+            #move = GoBoardUtil.generate_move_with_filter(board,pattern,check_selfatari)
+                
+            # use our policy
+            move = generate_all_policy_moves()
+
+            
             if move != None:
                 isLegalMove = board.move(move,color)
                 assert isLegalMove
@@ -418,6 +425,9 @@ class GoBoardUtil(object):
             moves = GoBoardUtil.generate_pattern_moves(board)
             move = GoBoardUtil.filter_moves_and_generate(board, moves, 
                                                          check_selfatari)
+            # gneratve atari and defence
+
+                                                         
         if move == None:
             move = GoBoardUtil.generate_random_move(board)
         return move 

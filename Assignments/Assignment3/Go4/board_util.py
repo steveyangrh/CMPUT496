@@ -78,6 +78,11 @@ class GoBoardUtil(object):
                 assert p not in moves
                 assert board.board[p] == EMPTY
                 moves.append(p)
+        final_moves = []
+        for al in moves:
+            if board.check_legal(al,color):
+                final_moves.append(al)
+        moves = final_moves;
         return moves
         
     @staticmethod
@@ -320,12 +325,30 @@ class GoBoardUtil(object):
     # return True if move should be filtered
     @staticmethod
     def filter(board, move, color, check_selfatari):
+
+        ataFileter=GoBoardUtil.selfatari_filter(board, move, color)
+        eyeFilter=GoBoardUtil.filleye_filter(board, move, color)
+
+        if (ataFileter is True) or (eyeFilter is True):
+            return True
+        return False     
+
+        
+        '''
+        if check_selfatari:
+            return GoBoardUtil.selfatari_filter(board, move, color)
+        else:
+            return GoBoardUtil.filleye_filter(board, move, color)
+        '''
+'''
+    
+    def filter(board, move, color, check_selfatari):
         if check_selfatari:
             return GoBoardUtil.selfatari_filter(board, move, color)
         else:
             return GoBoardUtil.filleye_filter(board, move, color)
 
-
+'''
     # return True if move should be filtered
     @staticmethod
     def filleye_filter(board, move, color):

@@ -100,16 +100,8 @@ class GoBoardUtil(object):
         if len(atari_capture_moves) > 0:
             return atari_capture_moves, "AtariCapture"
 
-	'''
         atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
         atari_defense_moves = GoBoardUtil.filter_moves(board, atari_defense_moves, check_selfatari)
-
-        if len(atari_defense_moves) > 0:
-            return atari_defense_moves, "AtariDefense"
-	'''
-        
-        pattern_moves = GoBoardUtil.generate_pattern_moves(board)
-        pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
 
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"

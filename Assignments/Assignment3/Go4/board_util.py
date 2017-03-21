@@ -340,15 +340,7 @@ class GoBoardUtil(object):
         else:
             return GoBoardUtil.filleye_filter(board, move, color)
         '''
-'''
-    
-    def filter(board, move, color, check_selfatari):
-        if check_selfatari:
-            return GoBoardUtil.selfatari_filter(board, move, color)
-        else:
-            return GoBoardUtil.filleye_filter(board, move, color)
 
-'''
     # return True if move should be filtered
     @staticmethod
     def filleye_filter(board, move, color):

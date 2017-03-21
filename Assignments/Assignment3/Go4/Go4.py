@@ -73,6 +73,8 @@ class Go4Player(object):
         emptyPoints = board.get_empty_points()
         moves = GoBoardUtil.generate_all_policy_moves(board,True, True)
         moves = moves [0]
+        if not moves:
+        	return None
         #print "moves"
         #print moves[0]
         '''

@@ -402,8 +402,8 @@ class GtpConnection():
 
             #################
             ## Genmove based on our policy
-            print ("move")
-            print (move)
+            #print ("move")
+            #print (move)
 
             
             self.board.move(move, color)

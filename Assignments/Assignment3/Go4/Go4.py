@@ -71,16 +71,25 @@ class Go4Player(object):
     def get_move(self, board, toplay):
         cboard = board.copy()
         emptyPoints = board.get_empty_points()
-        moves = []
+        moves = GoBoardUtil.generate_all_policy_moves(board,True, True)
+        moves = moves [0]
+        #print "moves"
+        #print moves[0]
+        '''
         for p in emptyPoints:
             if not GoBoardUtil.filleye_filter(board, p, toplay):
                 moves.append(p)
         if not moves: # pass move only, no need to simulate
             return None
         moves.append(None) # None for Pass
+        '''
         moveWins = []
         for move in moves:
+            #print "move"
+            #print move
             wins = self.simulateMove(board, cboard, move, toplay)
+            #print "move2"
+            #print move
             moveWins.append(wins)
         writeMoves(board, moves, moveWins, self.num_simulation)
         return select_best_move(board, moves, moveWins)

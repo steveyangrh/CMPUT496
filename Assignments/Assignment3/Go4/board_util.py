@@ -22,10 +22,10 @@ class GoBoardUtil(object):
         for _ in range(limit):
 
             # Modify for gtp cmd
-            #move = GoBoardUtil.generate_move_with_filter(board,pattern,check_selfatari)
+            move = GoBoardUtil.generate_move_with_filter(board,pattern,check_selfatari)
                 
             # use our policy
-            move = GoBoardUtil.generate_all_policy_moves(board,pattern,check_selfatari)
+            #move = GoBoardUtil.generate_all_policy_moves(board,pattern,check_selfatari)
 
             
             if move != None:

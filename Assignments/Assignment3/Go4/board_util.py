@@ -25,7 +25,7 @@ class GoBoardUtil(object):
             #move = GoBoardUtil.generate_move_with_filter(board,pattern,check_selfatari)
                 
             # use our policy
-            move = generate_all_policy_moves()
+            move = GoBoardUtil.generate_all_policy_moves(board,pattern,check_selfatari)
 
             
             if move != None:
@@ -326,29 +326,23 @@ class GoBoardUtil(object):
     @staticmethod
     def filter(board, move, color, check_selfatari):
 
+        '''
         ataFileter=GoBoardUtil.selfatari_filter(board, move, color)
         eyeFilter=GoBoardUtil.filleye_filter(board, move, color)
 
         if (ataFileter is True) or (eyeFilter is True):
             return True
-        return False     
+        return False
+        '''     
 
         
-        '''
+        
         if check_selfatari:
             return GoBoardUtil.selfatari_filter(board, move, color)
         else:
             return GoBoardUtil.filleye_filter(board, move, color)
-        '''
-'''
-    
-    def filter(board, move, color, check_selfatari):
-        if check_selfatari:
-            return GoBoardUtil.selfatari_filter(board, move, color)
-        else:
-            return GoBoardUtil.filleye_filter(board, move, color)
+        
 
-'''
     # return True if move should be filtered
     @staticmethod
     def filleye_filter(board, move, color):

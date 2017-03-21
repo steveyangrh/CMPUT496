@@ -78,6 +78,11 @@ class GoBoardUtil(object):
                 assert p not in moves
                 assert board.board[p] == EMPTY
                 moves.append(p)
+        final_moves = []
+        for al in moves:
+            if board.check_legal(al,color):
+                final_moves.append(al)
+        moves = final_moves;
         return moves
         
     @staticmethod

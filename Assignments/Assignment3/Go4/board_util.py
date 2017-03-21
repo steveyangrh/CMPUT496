@@ -87,21 +87,22 @@ class GoBoardUtil(object):
             Use in UI only. For playing, use generate_move_with_filter
             which is more efficient
         """
-        pattern_moves = GoBoardUtil.generate_pattern_moves(board)
-        pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
         
         atari_capture_moves = GoBoardUtil.generate_atari_capture_moves(board)
-        atari_capture_moves = GoBoardUtil.filter_moves(board, atari_capture_moves, check_selfatari)
-        atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
-        atari_defense_moves = GoBoardUtil.filter_moves(board, atari_defense_moves, check_selfatari)
+        atari_capture_moves = GoBoardUtil.filter_moves(board, atari_capture_moves, check_selfatari)     
 
             
         if len(atari_capture_moves) > 0:
             return atari_capture_moves, "AtariCapture"
 
+        atari_defense_moves = GoBoardUtil.generate_atari_defense_moves(board)
+        atari_defense_moves = GoBoardUtil.filter_moves(board, atari_defense_moves, check_selfatari)
+
         if len(atari_defense_moves) > 0:
             return atari_defense_moves, "AtariDefense"
         
+        pattern_moves = GoBoardUtil.generate_pattern_moves(board)
+        pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
 
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"
@@ -279,67 +280,6 @@ class GoBoardUtil(object):
                 final_moves.append(al)
         moves = final_moves;     
         return moves
-
-
-
-        '''
-        # second last move
-        last_move = board.last2_move
-        if last_move is None:
-            return moves
-
-        fboard_array = board._flood_fill(last_move)
-        board_copy_array= np.array(board.board, copy=True)
-
-        has_liberty = board._liberty_flood(fboard_array)
-        if not has_liberty:
-            return moves
-        else:
-            inds = list(*np.where(fboard_array == FLOODFILL))
-            total_liberty = 0
-            for f in inds:
-
-
-                if f is None:
-                    return []                  
-
-                f_neighbors = board._neighbors(f)                         
-                if f_neighbors is None:
-                    return []
-
-
-                for n in f_neighbors:
-                    if board_copy_array[n]==EMPTY:
-
-                        
-                        row,col = board._point_to_coord(n)
-                        #print ("Coor n: " + str([row,col]))
-                        #print ("leber: " +str(total_liberty))
-                        total_liberty = total_liberty + 1
-                        moves.append(n)       
-
-        #remove duplications
-        unique_moves=[]
-        for i in moves:
-            if i not in unique_moves:
-                unique_moves.append(i)
-        moves=unique_moves;
-
-        if len(moves)==1:
-            return moves
-            #respond(self, response = ''):
-
-        moves = []
-        return moves
-        '''
-
-        '''
-        print ("last_move2: ")
-        print (last_move)
-        row,col = board._point_to_coord(last_move)
-        print ("Coor n: " + str([row,col]))
-        '''
-        
 
         
     @staticmethod

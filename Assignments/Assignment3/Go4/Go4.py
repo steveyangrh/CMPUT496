@@ -75,7 +75,7 @@ class Go4Player(object):
         moves = moves [0]
         if not moves:
         	return None
-	moves.append(None)
+        moves.append(None)
         #print "moves"
         #print moves[0]
         '''

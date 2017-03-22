@@ -1,0 +1,11 @@
+Script started on Tue 21 Mar 2017 06:04:27 PM MDT
+c]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment3sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment3$ cp a3.tgz [K[K[K[K[K[K[K[K[K[Kmkdir presubmi ssion
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment3sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment3$ cp a3.tgz presuubmission
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment3sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment3$ cd presubmissioon/
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment3/presubmissionsampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment3/presubmission$  tar -xzf a3.tgz 
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment3/presubmissionsampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment3/presubmission$  cd Go4/
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment3/presubmission/Go4sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment3/presubmission/Goo4$ gogui-regress "Go4.py" sample[K[K[K[K[K[Ka3-sample.gtp 
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment3/presubmission/Go4sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment3/presubmission/Goo4$ exit
+exit
+
+Script done on Tue 21 Mar 2017 06:05:21 PM MDT

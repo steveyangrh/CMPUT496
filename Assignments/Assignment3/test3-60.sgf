@@ -1,0 +1,15 @@
+(;FF[4]CA[UTF-8]AP[gogui-twogtp:1.4.9]SZ[5]
+KM[6.5]PB[Go4:0.3]PW[Go4:0.3]DT[2017-03-21]RE[B+18.5]
+C[Black command: Go4Origin/Go4.py --sim 50
+White command: Go4AC/Go4.py --sim 50
+Black version: 0.3
+White version: 0.3
+Result[Black\]: B+18.5
+Result[White\]: B+18.5
+Host: uk02 (Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz)
+Date: March 21, 2017 9:02:17 PM MDT]
+;B[cc];W[bc];B[bb];W[bd];B[cd];W[ac];B[db];W[ab];B[cb];W[]
+;B[ae];W[be];B[ec];W[ce];B[ba];W[aa];B[de];W[];B[ee];W[dd]
+;B[ad];W[be];B[ce];W[bd];B[ed];W[];B[ac];W[ab];B[bc];W[be]
+;B[bd];W[eb];B[dc];W[da];B[aa];W[ca];B[ea];W[ca];B[da];W[]
+;B[])

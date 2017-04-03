@@ -38,6 +38,7 @@ class Go6Player():
         self.MCTS.toplay = color
         self.MCTS.pattern = True
         self.MCTS.selfatari = True
+        print ("here!!!!!!")
 
         for n in range(self.num_simulation):
             board_copy = board.copy()

@@ -13,7 +13,7 @@ cboard = board.copy()
 print("\nrunning playout 200 times\n")
 player.run( cboard, BLACK,print_info=True)
 
-
+'''
 #time.sleep(30) # sleeping
 player.num_simulation = 300
 print("\nrunning it 300 more times\n")
@@ -31,3 +31,4 @@ player.run( cboard, BLACK, print_info=True)
 print("\nrunning it 300 more times\n")
 cboard = board.copy()
 player.run( cboard, BLACK, print_info=True)
+'''

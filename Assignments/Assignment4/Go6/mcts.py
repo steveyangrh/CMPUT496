@@ -125,16 +125,14 @@ class MCTS(object):
 
         Arguments:
         board -- a copy of the board.
-        color -- color to play
-        
-
+        color -- color to play        
         Returns:
         None
         """
         node = self._root 
         # This will be True olny once for the root
         if not node._expanded:
-            node.expand(board, color)
+            node.expand(board, color)  # 1st: expanding
         while not node.is_leaf():
             # Greedily select next move.                
             max_flag = color == self.init_color

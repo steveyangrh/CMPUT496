@@ -43,8 +43,8 @@ class Go5Player():
             board_copy = board.copy()
             self.MCTS._playout(board_copy, color)
 
-        if print_info:
-            self.MCTS.good_print(board, self.MCTS._root, color,self.num_nodes)
+        #if print_info:
+        #    #self.MCTS.good_print(board, self.MCTS._root, color,self.num_nodes)
 
     def reset(self):
         self.MCTS = MCTS()

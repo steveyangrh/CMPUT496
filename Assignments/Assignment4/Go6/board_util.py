@@ -98,7 +98,9 @@ class GoBoardUtil(object):
         atari_moves = GoBoardUtil.filter_moves(board, atari_moves, check_selfatari)
         if len(atari_moves) > 0:
             return atari_moves, msg
+            
         pattern_moves = GoBoardUtil.generate_pattern_moves(board)
+        
         pattern_moves = GoBoardUtil.filter_moves(board, pattern_moves, check_selfatari)
         if len(pattern_moves) > 0:
             return pattern_moves, "Pattern"

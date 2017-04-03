@@ -478,6 +478,8 @@ class GtpConnection():
             self.debug_msg("Board:\n{}\nko: {}\n".format(str(self.board.get_twoD_board()),
                                                           self.board.ko_constraint))
             move = self.go_engine.get_move(self.board, color)
+            #print ("move is")
+            #print (move)
             if move is None:
                 self.respond("pass")
                 return

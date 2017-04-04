@@ -87,6 +87,10 @@ class TreeNode(object):
                         
                         # may need to change here to consistence with given result
                         self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])
+                        
+                        #testing probability
+                        print(self._children[move]._prob_simple_feature)
+                        
                         gammas_sum += self._children[move]._prob_simple_feature
 
         self._children[PASS] = TreeNode(self)
@@ -105,6 +109,10 @@ class TreeNode(object):
                         
                         
                         self._children[move]._prob_simple_feature = self._children[move]._prob_simple_feature / gammas_sum
+                        
+                        #testing probability
+                        print(self._children[move]._prob_simple_feature)
+                         
             self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
         self._expanded = True
         
@@ -168,7 +176,8 @@ class MCTS(object):
         moves=[]
         #To do: gen moves based on mcts
         moves=self._root.Node_PolicyMove( board, color)
-        
+        print("mcts moves: ")
+        print (moves)
         return moves, "MCTS"
         
     def _playout(self, board, color):

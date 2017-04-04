@@ -129,26 +129,29 @@ class MCTS(object):
         Returns:
         None
         """
+        
+        # The standard MTCS
+        
         node = self._root 
         # This will be True olny once for the root
         if not node._expanded:
             node.expand(board, color)  # 1st: expanding
         while not node.is_leaf():
             # Greedily select next move.                
-            max_flag = color == self.init_color
+            max_flag = color == self.init_color # 2nd: selecting
             move, next_node = node.select(self.exploration,max_flag)
             if move!=PASS:
                 assert board.check_legal(move, color)
             if move == PASS:
                 move = None
-            board.move(move, color)
+            board.move(move, color) # 3rd: simulating
             color = GoBoardUtil.opponent(color) 
             node = next_node
         assert node.is_leaf()
         if not node._expanded:
             node.expand(board, color)
 
-        board.current_player = color
+        board.current_player = color #4th rollout
         leaf_value = self._evaluate_rollout(board, color)  
         # Update value and visit count of nodes in this traversal.
         node.update_recursive(leaf_value)

@@ -330,7 +330,8 @@ class GtpConnection():
         if len(policy_moves) == 0:
             self.respond("Pass")
         else:
-            response = " " + GoBoardUtil.sorted_point_string_withprobs(policy_moves, self.board.NS,MoveProbs)
+            response = " [" + GoBoardUtil.sorted_point_string_withprobs(policy_moves, self.board.NS,MoveProbs)+"]"
+            
             self.respond(response)
 
     def random_moves_cmd(self, args):

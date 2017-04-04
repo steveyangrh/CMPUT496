@@ -312,9 +312,17 @@ class GtpConnection():
         """
             Return list of policy moves for the current_player of the board
         """
+        # To do: change generate_all_policy_moves to corresponding 
+        # MCTS code
+        # GoBoardUtil.generate_all_policy_moves
+        #...
         policy_moves, type_of_move = GoBoardUtil.generate_all_policy_moves(self.board,
                                                 self.go_engine.pattern,
                                                 self.go_engine.selfatari)
+                                                
+                                                
+                                                
+                                                        
         if len(policy_moves) == 0:
             self.respond("Pass")
         else:

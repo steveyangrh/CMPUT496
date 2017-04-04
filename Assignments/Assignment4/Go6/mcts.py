@@ -70,6 +70,41 @@ class TreeNode(object):
             self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
         self._expanded = True
 
+    def MCTS_PolicyMove(self, board, color):
+        """Expands tree by creating new children.
+        """
+        gammas_sum = 0.0
+        moves = board.get_empty_points()
+        all_board_features = Feature.find_all_features(board)
+        for move in moves:
+            if move not in self._children:
+                if board.check_legal(move, color) and not board.is_eye(move, color):
+                    self._children[move] = TreeNode(self)
+                    self._children[move]._move = move
+                    if len(Features_weight) != 0:
+                        # when we have features weight, use that to compute knowledge (gamma) of each move
+                        assert move in all_board_features
+                        self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])
+                        gammas_sum += self._children[move]._prob_simple_feature
+
+        self._children[PASS] = TreeNode(self)
+        self._children[PASS]._move = move
+        
+        # when we have features weight, use that to compute knowledge (gamma) of each move
+        if len(Features_weight) != 0:
+            self._children[PASS]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features["PASS"])
+            gammas_sum += self._children[PASS]._prob_simple_feature
+        
+        # Normalize to get probability
+        if len(Features_weight) != 0 and gammas_sum != 0.0:
+            for move in moves:
+                if move not in self._children:
+                    if board.check_legal(move, color) and not board.is_eye(move, color):
+                        self._children[move]._prob_simple_feature = self._children[move]._prob_simple_feature / gammas_sum
+            self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
+        self._expanded = True
+
+
     def select(self, exploration, max_flag):
         """Select move among children that gives maximizes UCT. 
         If number of visits are zero for a node, value for that node is infinity so definitely will  gets selected

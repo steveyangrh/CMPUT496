@@ -84,6 +84,8 @@ class TreeNode(object):
                     if len(Features_weight) != 0:
                         # when we have features weight, use that to compute knowledge (gamma) of each move
                         assert move in all_board_features
+                        
+                        # may need to change here to consistence with given result
                         self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])
                         gammas_sum += self._children[move]._prob_simple_feature
 
@@ -100,6 +102,8 @@ class TreeNode(object):
             for move in moves:
                 if move not in self._children:
                     if board.check_legal(move, color) and not board.is_eye(move, color):
+                        
+                        
                         self._children[move]._prob_simple_feature = self._children[move]._prob_simple_feature / gammas_sum
             self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
         self._expanded = True

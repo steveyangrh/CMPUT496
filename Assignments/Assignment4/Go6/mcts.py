@@ -70,7 +70,7 @@ class TreeNode(object):
             self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
         self._expanded = True
 
-    def MCTS_PolicyMove(self, board, color):
+    def Node_PolicyMove(self, board, color):
         """Expands tree by creating new children.
         """
         gammas_sum = 0.0
@@ -103,6 +103,8 @@ class TreeNode(object):
                         self._children[move]._prob_simple_feature = self._children[move]._prob_simple_feature / gammas_sum
             self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
         self._expanded = True
+        
+        return moves
 
 
     def select(self, exploration, max_flag):
@@ -152,7 +154,19 @@ class MCTS(object):
     def __init__(self):
         self._root = TreeNode(None)
         self.init_color = BLACK
+    def MCTS_PolicyMove(self,board):
     
+        color=board.current_player
+        
+        #print ("board.current_player:")
+        #print (board.current_player)
+        #self._root.Node_PolicyMove()        
+        moves=[]
+        #To do: gen moves based on mcts
+        moves=self._root.Node_PolicyMove( board, color)
+        
+        return moves, "MCTS"
+        
     def _playout(self, board, color):
         """Run a single playout from the root to the given depth, getting a value at the leaf and
         propagating it back through its parents. State is modified in-place, so a copy must be

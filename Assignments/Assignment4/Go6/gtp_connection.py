@@ -316,9 +316,13 @@ class GtpConnection():
         # MCTS code
         # GoBoardUtil.generate_all_policy_moves
         #...
+        #color = GoBoardUtil.color_to_int(board_color)
+        policy_moves,type_of_move=self.go_engine.MCTS.MCTS_PolicyMove(self.board)
+        '''
         policy_moves, type_of_move = GoBoardUtil.generate_all_policy_moves(self.board,
                                                 self.go_engine.pattern,
-                                                self.go_engine.selfatari)
+                                                self.go_engine.selfata 
+        '''
                                                 
                                                 
                                                 

@@ -76,6 +76,8 @@ class TreeNode(object):
         gammas_sum = 0.0
         moves = board.get_empty_points()
         all_board_features = Feature.find_all_features(board)
+        
+        
         for move in moves:
             if move not in self._children:
                 if board.check_legal(move, color) and not board.is_eye(move, color):
@@ -89,10 +91,31 @@ class TreeNode(object):
                         self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])
                         
                         #testing probability
-                        print(self._children[move]._prob_simple_feature)
+                        #print(self._children[move]._prob_simple_feature)
                         
                         gammas_sum += self._children[move]._prob_simple_feature
+        mctsMoves =[]
+        mctsProbs=[]
+        # appending normalized probability to each move
+        for move in moves:        
+            if board.check_legal(move, color) and not board.is_eye(move, color):
+                self._children[move] = TreeNode(self)
+                self._children[move]._move = move
+                if len(Features_weight) != 0:
+                    # when we have features weight, use that to compute knowledge (gamma) of each move
+                    assert move in all_board_features
+                    
+                    # may need to change here to consistence with given result
+                    self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])
+                    mctsMoves.append(move)
+                    mctsProbs.append(self._children[move]._prob_simple_feature/gammas_sum)
+                    #testing probability
+                    #print(self._children[move]._prob_simple_feature/gammas_sum)
+                    
+                    #gammas_sum += self._children[move]._prob_simple_feature
+        
 
+        '''
         self._children[PASS] = TreeNode(self)
         self._children[PASS]._move = move
         
@@ -104,6 +127,7 @@ class TreeNode(object):
         # Normalize to get probability
         if len(Features_weight) != 0 and gammas_sum != 0.0:
             for move in moves:
+                print("bugs here")
                 if move not in self._children:
                     if board.check_legal(move, color) and not board.is_eye(move, color):
                         
@@ -116,7 +140,11 @@ class TreeNode(object):
             self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
         self._expanded = True
         
-        return moves
+        
+        #for move in moves:            
+        #    print(self._children[move]._prob_simple_feature)
+        '''
+        return mctsMoves,mctsProbs
 
 
     def select(self, exploration, max_flag):
@@ -170,15 +198,14 @@ class MCTS(object):
     
         color=board.current_player
         
-        #print ("board.current_player:")
-        #print (board.current_player)
-        #self._root.Node_PolicyMove()        
-        moves=[]
-        #To do: gen moves based on mcts
-        moves=self._root.Node_PolicyMove( board, color)
+        moves,probs=self._root.Node_PolicyMove( board, color)
+        '''
         print("mcts moves: ")
         print (moves)
-        return moves, "MCTS"
+        print("mcts probs: ")
+        print (probs)
+        '''
+        return moves, probs
         
     def _playout(self, board, color):
         """Run a single playout from the root to the given depth, getting a value at the leaf and

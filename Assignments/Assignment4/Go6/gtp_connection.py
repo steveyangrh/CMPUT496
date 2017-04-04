@@ -317,7 +317,7 @@ class GtpConnection():
         # GoBoardUtil.generate_all_policy_moves
         #...
         #color = GoBoardUtil.color_to_int(board_color)
-        policy_moves,type_of_move=self.go_engine.MCTS.MCTS_PolicyMove(self.board)
+        policy_moves,MoveProbs=self.go_engine.MCTS.MCTS_PolicyMove(self.board)
         '''
         policy_moves, type_of_move = GoBoardUtil.generate_all_policy_moves(self.board,
                                                 self.go_engine.pattern,
@@ -330,7 +330,7 @@ class GtpConnection():
         if len(policy_moves) == 0:
             self.respond("Pass")
         else:
-            response = type_of_move + " " + GoBoardUtil.sorted_point_string(policy_moves, self.board.NS)
+            response = " " + GoBoardUtil.sorted_point_string_withprobs(policy_moves, self.board.NS,MoveProbs)
             self.respond(response)
 
     def random_moves_cmd(self, args):

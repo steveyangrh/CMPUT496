@@ -62,6 +62,15 @@ class GoBoardUtil(object):
             x, y = GoBoardUtil.point_to_coord(point, ns)
             result.append(GoBoardUtil.format_point((x, y)))
         return ' '.join(sorted(result))
+    
+    #added code
+    @staticmethod
+    def sorted_point_string_withprobs(points, ns,probs):
+        result = []
+        for point in points:
+            x, y = GoBoardUtil.point_to_coord(point, ns)
+            result.append(GoBoardUtil.format_point((x, y)))
+        return ' '.join(sorted(result))
 
     @staticmethod
     def generate_pattern_moves(board):

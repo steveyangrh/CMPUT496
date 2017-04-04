@@ -1,0 +1,40 @@
+boardsize 5
+clear_board
+
+play b c3
+
+play w c2
+
+play b d2
+
+play w b3
+
+play b b4
+
+play w c4
+
+play b d3
+
+play w d4
+
+play b e4
+
+play w b5
+
+play b a4
+
+play w b1
+
+play b c5
+
+play w d5
+
+play b a3
+
+play w d1
+
+play b b2
+
+play w a2
+
+10 policy_moves

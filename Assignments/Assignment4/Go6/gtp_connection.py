@@ -328,9 +328,9 @@ class GtpConnection():
                                                 
                                                         
         if len(policy_moves) == 0:
-            self.respond(" [Pass 1.00000]")
+            self.respond("Pass 1.00000")
         else:
-            response = " [" + GoBoardUtil.sorted_point_string_withprobs(policy_moves, self.board.NS,MoveProbs)+"]"
+            response = GoBoardUtil.sorted_point_string_withprobs(policy_moves, self.board.NS,MoveProbs)
             
             self.respond(response)
 

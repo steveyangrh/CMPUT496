@@ -71,7 +71,7 @@ class TreeNode(object):
         self._expanded = True
 
     def Node_PolicyMove(self, board, color):
-        """Expands tree by creating new children.
+        """simulation .
         """
         gammas_sum = 0.0
         moves = board.get_empty_points()
@@ -88,11 +88,8 @@ class TreeNode(object):
                         assert move in all_board_features
                         
                         # may need to change here to consistence with given result
-                        self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])
-                        
-                        #testing probability
-                        #print(self._children[move]._prob_simple_feature)
-                        
+                        self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])                        
+                                                
                         gammas_sum += self._children[move]._prob_simple_feature
         mctsMoves =[]
         mctsProbs=[]
@@ -109,41 +106,7 @@ class TreeNode(object):
                     self._children[move]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features[move])
                     mctsMoves.append(move)
                     mctsProbs.append(self._children[move]._prob_simple_feature/gammas_sum)
-                    #testing probability
-                    #print(self._children[move]._prob_simple_feature/gammas_sum)
                     
-                    #gammas_sum += self._children[move]._prob_simple_feature
-        
-
-        '''
-        self._children[PASS] = TreeNode(self)
-        self._children[PASS]._move = move
-        
-        # when we have features weight, use that to compute knowledge (gamma) of each move
-        if len(Features_weight) != 0:
-            self._children[PASS]._prob_simple_feature = Feature.compute_move_gamma(Features_weight, all_board_features["PASS"])
-            gammas_sum += self._children[PASS]._prob_simple_feature
-        
-        # Normalize to get probability
-        if len(Features_weight) != 0 and gammas_sum != 0.0:
-            for move in moves:
-                print("bugs here")
-                if move not in self._children:
-                    if board.check_legal(move, color) and not board.is_eye(move, color):
-                        
-                        
-                        self._children[move]._prob_simple_feature = self._children[move]._prob_simple_feature / gammas_sum
-                        
-                        #testing probability
-                        print(self._children[move]._prob_simple_feature)
-                         
-            self._children[PASS]._prob_simple_feature = self._children[PASS]._prob_simple_feature / gammas_sum
-        self._expanded = True
-        
-        
-        #for move in moves:            
-        #    print(self._children[move]._prob_simple_feature)
-        '''
         return mctsMoves,mctsProbs
 
 
@@ -196,15 +159,9 @@ class MCTS(object):
         self.init_color = BLACK
     def MCTS_PolicyMove(self,board):
     
-        color=board.current_player
-        
+        color=board.current_player        
         moves,probs=self._root.Node_PolicyMove( board, color)
-        '''
-        print("mcts moves: ")
-        print (moves)
-        print("mcts probs: ")
-        print (probs)
-        '''
+
         return moves, probs
         
     def _playout(self, board, color):

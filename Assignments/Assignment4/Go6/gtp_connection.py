@@ -318,14 +318,7 @@ class GtpConnection():
         #...
         #color = GoBoardUtil.color_to_int(board_color)
         policy_moves,MoveProbs=self.go_engine.MCTS.MCTS_PolicyMove(self.board)
-        '''
-        policy_moves, type_of_move = GoBoardUtil.generate_all_policy_moves(self.board,
-                                                self.go_engine.pattern,
-                                                self.go_engine.selfata 
-        '''
-                                                
-                                                
-                                                
+                              
                                                         
         if len(policy_moves) == 0:
             self.respond("Pass 1.00000")

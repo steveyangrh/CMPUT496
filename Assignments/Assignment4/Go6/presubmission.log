@@ -1,0 +1,12 @@
+Script started on Tue 11 Apr 2017 02:53:10 PM MDT
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment4sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment4$ cp a4.tgz presubmission
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment4sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment4$ cd presubmission/
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment4/presubmissionsampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment4/presubmission$ tar -xzf a4.tgz 
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment4/presubmissionsampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment4/presubmission$ ls
+[0m[01;31ma4.tgz[0m  [01;34mGo6[0m
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment4/presubmissionsampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment4/presubmission$ cd Go6/
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment4/presubmission/Go6sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment4/presubmission/Go6$ gogui-regress 'python3 Go6.py' a4-sample.gtp 
+]0;sampley@miranda: ~/Documents/CMPUT496/git/Assignments/Assignment4/presubmission/Go6sampley@miranda:~/Documents/CMPUT496/git/Assignments/Assignment4/presubmission/Go6$ exit
+exit
+
+Script done on Tue 11 Apr 2017 02:54:06 PM MDT

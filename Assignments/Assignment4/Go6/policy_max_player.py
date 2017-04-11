@@ -58,8 +58,8 @@ class Go6Player():
 
     def get_move(self, board, color):
         policy_moves,MoveProbs=GoBoardUtil.generate_all_policy_moves(board,True,True)
-        move = np.random.choice(policy_moves,1,MoveProbs)
-        move = move[0]
+        index = np.argmax(MoveProbs)
+        move = policy_moves[index]
         self.update(move)
         return move
 

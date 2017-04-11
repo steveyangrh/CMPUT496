@@ -73,6 +73,15 @@ class TreeNode(object):
     def Node_PolicyMove(self, board, color):
         """simulation .
         """
+        self._children = {}  # a map from move to TreeNode
+        self._n_visits = 0
+        self._black_wins = 0
+        self._expanded = False
+        self._move = None
+        self._prob_simple_feature = 1.0
+
+
+
         gammas_sum = 0.0
         moves = board.get_empty_points()
         all_board_features = Feature.find_all_features(board)

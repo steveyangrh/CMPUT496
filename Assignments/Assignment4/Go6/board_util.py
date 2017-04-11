@@ -116,7 +116,7 @@ class GoBoardUtil(object):
             Use in UI only. For playing, use generate_move_with_filter
             which is more efficient
         """
-        '''
+        
         atari_moves,msg = GoBoardUtil.generate_atari_moves(board)
         atari_moves = GoBoardUtil.filter_moves(board, atari_moves, check_selfatari)
         if len(atari_moves) > 0:
@@ -132,6 +132,7 @@ class GoBoardUtil(object):
         from mcts import MCTS
         policy_moves,MoveProbs=MCTS.MCTS_PolicyMove(board)
         return [policy_moves, MoveProbs]
+        '''
 
     @staticmethod
     def generate_random_moves(board):

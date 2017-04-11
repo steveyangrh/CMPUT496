@@ -57,7 +57,7 @@ class Go6Player():
         self.MCTS.update_with_move(move)
 
     def get_move(self, board, color):
-        policy_moves,MoveProbs=GoBoardUtil.generate_all_policy_moves(board,True,True)
+        policy_moves,MoveProbs=MCTS.MCTS_PolicyMove(board)
         index = np.argmax(MoveProbs)
         move = policy_moves[index]
         self.update(move)

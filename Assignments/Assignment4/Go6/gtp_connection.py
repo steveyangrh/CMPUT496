@@ -469,7 +469,7 @@ class GtpConnection():
     def genmove_cmd(self, args):
         """
         generate a move for the specified color
-
+        policy_moves,MoveProbs=self.go_engine.MCTS.MCTS_PolicyMove(self.board)
         Arguments
         ---------
         args[0] : {'b','w'}
@@ -483,7 +483,7 @@ class GtpConnection():
             color = GoBoardUtil.color_to_int(board_color)
             self.debug_msg("Board:\n{}\nko: {}\n".format(str(self.board.get_twoD_board()),
                                                           self.board.ko_constraint))
-
+            #policy_moves,MoveProbs=self.go_engine.MCTS.MCTS_PolicyMove(self.board)
             #print("___________________________________")
             move = self.go_engine.get_move(self.board, color)
             #print("___________________________________")

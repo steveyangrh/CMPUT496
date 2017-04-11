@@ -163,6 +163,13 @@ class MCTS(object):
         moves,probs=self._root.Node_PolicyMove( board, color)
 
         return moves, probs
+
+    def MCTS_GenMove(self,board,color):
+    
+        #color=board.current_player        
+        moves,probs=self._root.Node_PolicyMove( board, color)
+
+        return moves, probs
         
     def _playout(self, board, color):
         """Run a single playout from the root to the given depth, getting a value at the leaf and

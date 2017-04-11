@@ -54,6 +54,7 @@ class Go6Player():
         self.MCTS.update_with_move(move)
 
     def get_move(self, board, color):
+
         move = self.MCTS.get_move(board,
                 color,
                 komi=self.komi,

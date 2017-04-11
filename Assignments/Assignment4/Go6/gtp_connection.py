@@ -483,7 +483,10 @@ class GtpConnection():
             color = GoBoardUtil.color_to_int(board_color)
             self.debug_msg("Board:\n{}\nko: {}\n".format(str(self.board.get_twoD_board()),
                                                           self.board.ko_constraint))
+
+            #print("___________________________________")
             move = self.go_engine.get_move(self.board, color)
+            #print("___________________________________")
             #self.respond("move is")
             #self.respond(move)
             #print("move is")

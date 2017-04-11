@@ -53,15 +53,10 @@ class Go6Player():
     def update(self, move):
         self.MCTS.update_with_move(move)
 
-    def get_move(self, board, color):
-        move = self.MCTS.get_move(board,
-                color,
-                komi=self.komi,
-                limit=self.limit,
-                selfatari=self.selfatari,
-                pattern=self.pattern,
-                num_simulation = self.num_simulation,
-                exploration = self.exploration)
+    def get_move(self, board, color): #policy_moves,MoveProbs=self.MCTS.MCTS_GenMove(board,color)
+        policy_moves,MoveProbs=self.MCTS.MCTS_GenMove(board,color)
+        move = np.random.choice(policy_moves,1,MoveProbs)
+        move = move[0]
         self.update(move)
         return move
 
